@@ -13,10 +13,10 @@ class RolesSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Roles::factory(3)->createMany([
-            'title' => 'Admin',
-            'title' => 'Librarian',
-            'title' => 'Cardholder',
+        \App\Models\Roles::factory(1)->createMany([
+            ['title' => 'Admin'],
+            ['title' => 'Librarian'],
+            ['title' => 'Cardholder']
         ]);
     }
 }

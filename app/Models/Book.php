@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'publisher', 'publication_year'];
+    protected $fillable = ['name', 'description', 'publisherid', 'publication_year'];
 
     protected $with = ["publisher", "author"];
 
@@ -26,10 +26,10 @@ class Book extends Model
 
     public function publisher()
     {
-        return $this->belongsTo(
+        return $this->hasOne(
             '\App\Models\Publisher',
-            'publisherid',
-            'id'
+            'id',
+            'publisherid'
         );
     }
 }
