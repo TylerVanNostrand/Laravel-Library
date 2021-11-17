@@ -43,6 +43,7 @@ class BooksController extends Controller
         $book = Book::create([
             'name' => $faker->name,
             'description' => $faker->sentence,
+            'publisher' => $faker->company,
             'publication_year' => $faker->year
         ]);
 

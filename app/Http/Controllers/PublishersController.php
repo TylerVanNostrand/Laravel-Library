@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use App\Http\Resources\PublishersResource;
+use App\Http\Requests\PublishersRequest;
 
 class PublishersController extends Controller
 {
@@ -15,7 +16,7 @@ class PublishersController extends Controller
      */
     public function index()
     {
-        //
+        return PublishersResource::collection(Publisher::all());
     }
 
     /**
@@ -34,9 +35,14 @@ class PublishersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PublishersRequest $request)
     {
-        //
+        $faker = \Faker\Factory::create(1);
+        $publisher = Publisher::create([
+            'name' => $faker->company
+        ]);
+
+        return new PublishersResource($publisher);
     }
 
     /**
@@ -68,9 +74,13 @@ class PublishersController extends Controller
      * @param  \App\Models\Publisher  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publisher $publisher)
+    public function update(PublishersRequest $request, Publisher $publisher)
     {
-        //
+        $publisher->update([
+            'name' => $request->input('name')
+        ]);
+
+        return new PublishersResource($publisher);
     }
 
     /**
@@ -81,6 +91,7 @@ class PublishersController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+        return response(null, 204);
     }
 }

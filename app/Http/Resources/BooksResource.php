@@ -21,10 +21,11 @@ class BooksResource extends JsonResource
                 'name' => $this->name,
                 'author' => $this->author,
                 'description' => $this->description,
+                'publisher' => \App\Models\Publisher::find($this->publisherid)->get(),
                 'publication_year' => $this->publication_year,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
-            ]
+            ],
         ];
     }
 }

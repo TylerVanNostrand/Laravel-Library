@@ -16,6 +16,7 @@ class BookFactory extends Factory
         return [
             'name' => $this->faker->name,
             'description' => $this->faker->sentence,
+            'publisherid' => \App\Models\Publisher::all()->random()->id,
             'publication_year' => (string) $this->faker->year
         ];
     }
