@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $with = ['roles'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function author()
+    {
+        return $this->hasManyThrough(
+            '\App\Models\Roles',
+            '\App\Models\UserRoles',
+            'user_id',
+            'id',
+            'id',
+            'roles_id'
+        );
+    }
 }
